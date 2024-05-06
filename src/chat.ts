@@ -12,7 +12,7 @@ export interface IBody {
   };
 }
 
-interface IRequest {
+export interface IRequest {
   env: any;
   request: IBody;
 }
@@ -73,7 +73,8 @@ export const handle = async (req: IRequest): Promise<string> => {
       for (const tool of ask.choices[0].message.tool_calls) {
         const result = await FunctionHandler.handle(
           tool.function.name,
-          JSON.parse(tool.function.arguments)
+          JSON.parse(tool.function.arguments),
+          req
         );
 
         console.log("result", result);
