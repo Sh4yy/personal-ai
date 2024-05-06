@@ -1,10 +1,14 @@
 import { IFunction } from "./type";
+import { IRequest } from "../chat";
 
-const API_KEY = "<api_key>"; // Replace with your actual OpenWeather API key
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
-export const getWeather = async (lon: number, lat: number): Promise<string> => {
-  const url = `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+export const getWeather = async (
+  lon: number,
+  lat: number,
+  apiKey: string
+): Promise<string> => {
+  const url = `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -37,7 +41,11 @@ export const weather: IFunction = {
       },
     },
   },
-  async execute(args: any) {
-    return await getWeather(args.longitude, args.latitude);
+  async execute(args: any, req: IRequest) {
+    return await getWeather(
+      args.longitude,
+      args.latitude,
+      req.env.OPENWEATHERMAP_API_KEY
+    );
   },
 };

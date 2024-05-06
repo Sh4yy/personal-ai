@@ -10,3 +10,7 @@ yarn.lock
 
 .dev.vars
 wrangler.dev.toml
+.wrangler
+
+# Author did not include the lockfile in the published package so I respect that.
+bun.lockb
