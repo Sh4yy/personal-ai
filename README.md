@@ -35,7 +35,7 @@ The assistant is run on Cloudflare Workers and can work with any LLM model. The 
 6. **Set up API keys**:
 
 - Run `npx wrangler secret put GROQ_API_KEY` to set the GROQ API key.
-- Run `npx wrangler secret put OPENWEATHER_API_KEY` to set the OpenWeather API key.
+- Run `npx wrangler secret put OPENWEATHERMAP_API_KEY` to set the OpenWeather API key.
 
    > **Note**: You can get these keys by signing up on [GroqCloud](https://console.groq.com/login) and [OpenWeather](https://home.openweathermap.org/users/sign_up) respectively.
 
