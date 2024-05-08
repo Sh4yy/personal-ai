@@ -4,7 +4,7 @@ This is a personal AI assistant that works with Apple Shortcuts removing the nee
 
 ## How it works
 
-The assistant is run on Cloudflare Workers and can work with any LLM model. The code snippet here uses llama 3 as an example with a custom function calling for fetching weather data.
+The assistant is run on Cloudflare Workers and can work with any LLM model. The code snippet here uses llama 3 as an example with a custom function calling for fetching weather data and search online.
 
 ## Setting Up the Shortcut
 
@@ -36,8 +36,9 @@ The assistant is run on Cloudflare Workers and can work with any LLM model. The 
 
 - Run `npx wrangler secret put GROQ_API_KEY` to set the GROQ API key.
 - Run `npx wrangler secret put OPENWEATHERMAP_API_KEY` to set the OpenWeather API key.
+- Run `npx wrangler secret put SEARCH1API_KEY` to set the SEARCH1API_KEY API key.
 
-   > **Note**: You can get these keys by signing up on [GroqCloud](https://console.groq.com/login) and [OpenWeather](https://home.openweathermap.org/users/sign_up) respectively.
+   > **Note**: You can get these keys by signing up on [GroqCloud](https://console.groq.com/login) and [OpenWeather](https://home.openweathermap.org/users/sign_up) and and [Search1API](https://www.search1api.com/)respectively.
 
 ### Deploying the Worker
 
