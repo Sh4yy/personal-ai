@@ -38,7 +38,7 @@ The assistant is run on Cloudflare Workers and can work with any LLM model. The 
 - Run `npx wrangler secret put OPENWEATHERMAP_API_KEY` to set the OpenWeather API key.
 - Run `npx wrangler secret put SEARCH1API_KEY` to set the SEARCH1API_KEY API key.
 
-   > **Note**: You can get these keys by signing up on [GroqCloud](https://console.groq.com/login) and [OpenWeather](https://home.openweathermap.org/users/sign_up) and and [Search1API](https://www.search1api.com/)respectively.
+   > **Note**: You can get these keys by signing up on [GroqCloud](https://console.groq.com/login) and [OpenWeather](https://home.openweathermap.org/users/sign_up) and and [Search1API](https://www.search1api.com/) respectively.
 
 ### Deploying the Worker
 
