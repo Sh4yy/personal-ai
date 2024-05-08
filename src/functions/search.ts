@@ -22,8 +22,6 @@ export const searchWeb = async (
       crawl_results: 0,
     }),
   };
-  console.log("Search request:", url, options);
-
   try {
     const response = await fetch(url, options);
     if (!response.ok) {

@@ -71,7 +71,6 @@ export const handle = async (req: IRequest): Promise<string> => {
       });
 
       for (const tool of ask.choices[0].message.tool_calls) {
-        console.log("Function call:", tool.function.name, JSON.parse(tool.function.arguments));
         const result = await FunctionHandler.handle(
           tool.function.name,
           JSON.parse(tool.function.arguments),
