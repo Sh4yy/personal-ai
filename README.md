@@ -57,7 +57,7 @@ To deploy the worker, run `npx wrangler deploy`.
 ### Setting Up the Shortcut
 
 1. **Install the shortcut**:
-   - Use [this link](https://www.icloud.com/shortcuts/284c0f68f7b0450ebab0b19e9adc317f) to install the shortcut.
+   - Use [this link](https://www.icloud.com/shortcuts/21cb74bb382c4e2298123ac375f9573a) to install the shortcut.
 
 2. **Configure the shortcut**:
    - Open the shortcut and replace the `URL` field with your worker's URL.
