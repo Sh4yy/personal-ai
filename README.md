@@ -43,6 +43,7 @@ The assistant is run on Cloudflare Workers and can work with any LLM model. The 
 
 7. **Update the LLMs Vars**:
    ```toml
+      [vars]
       API_BASE= "https://api.groq.com/openai/v1/"
       MODEL="llama3-70b-8192"
       SYSTEM_PROMPT="You are Siri Pro. Answer in 1-2 sentences. Be friendly, helpful and concise. Default to metric units when possible. Keep the conversation short and sweet. You only answer in text. Don't include links or any other extras. Don't respond with computer code, for example don't return user longitude."
