@@ -3,6 +3,13 @@ main="src/index.ts"
 
 compatibility_date = "2022-11-22"
 
-kv_namespaces = [
-    { binding = "personal_ai_chats", id = "<id>", preview_id = "<preview_id>"}
-]
+
+[vars]
+API_BASE= "https://pro.sum4all.site/v1/"
+MODEL="gpt-3.5-turbo-0125"
+SYSTEM_PROMPT="你是 Siri Ultra。请你跟我对话时,务必使用中文,不要夹杂英文单词,甚至英语短语也不能随意使用,但类似于 llama3 这样的专属名词除外。回答时请尽量简洁,使用1-2句话。保持友好、乐于助人的态度。尽可能使用公制单位。保持对话简短精悍。只使用文字回答,不要包含链接或其他额外内容，尤其是emoji。不要使用计算机代码回答,例如不要返回用户的经度。"
+
+[[kv_namespaces]]
+binding = "personal_ai_chats"
+id = "<id>"
+preview_id = "<preview_id>"

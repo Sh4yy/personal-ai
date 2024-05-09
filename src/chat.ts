@@ -18,33 +18,34 @@ export interface IRequest {
 }
 
 export const getClient = (req: IRequest): { client: OpenAI; model: string } => {
-  const url = "https://api.groq.com/openai/v1/";
-
+  const url = req.env.API_BASE || "https://api.groq.com/openai/v1/";
   const client = new OpenAI({
-    apiKey: req.env.GROQ_API_KEY,
+    apiKey: req.env.API_KEY,
   });
-
   client.baseURL = url;
-
-  return { client, model: "llama3-70b-8192" };
+  const model = req.env.MODEL || "llama3-70b-8192";
+  return { client, model };
 };
 
 export const handle = async (req: IRequest): Promise<string> => {
   const openai = getClient(req);
-
-  const system = `
-  You are Siri Pro. Answer in 1-2 sentences. Be friendly, helpful and concise.
-  Default to metric units when possible. Keep the conversation short and sweet.
-  You only answer in text. Don't include links or any other extras.
-  Don't respond with computer code, for example don't return user longitude.
-
-
-  User's current info:
-  date: ${req.request.date}
-  lat:${req.request.location.latitude}, lon:${req.request.location.longitude}
+  const defaultSystemPrompt = `
+    You are Siri Pro. Answer in 1-2 sentences. Be friendly, helpful and concise. 
+    Default to metric units when possible. Keep the conversation short and sweet. 
+    You only answer in text. Don't include links or any other extras. 
+    Don't respond with computer code, for example don't return user longitude.
   `;
 
+  const customSystemPrompt = req.env.SYSTEM_PROMPT || defaultSystemPrompt;
+
+  const system = `
+    ${customSystemPrompt}
+    User's current info:
+    date: ${req.request.date}
+    lat:${req.request.location.latitude}, lon:${req.request.location.longitude}
+  `;
   console.log("system", system);
+
   const chat = ChatHistory.getInstance(req.env.personal_ai_chats);
   await chat.add(req.request.chat_id, {
     role: "user",
@@ -61,22 +62,20 @@ export const handle = async (req: IRequest): Promise<string> => {
       ],
       tools: FunctionHandler.functions,
     });
-
     console.log("ask", JSON.stringify(ask, null, 2));
+
     if (ask.choices[0].message.tool_calls) {
       chat.add(req.request.chat_id, {
         role: "assistant",
         name: "tool",
         tool_calls: ask.choices[0].message.tool_calls,
       });
-
       for (const tool of ask.choices[0].message.tool_calls) {
         const result = await FunctionHandler.handle(
           tool.function.name,
           JSON.parse(tool.function.arguments),
           req
         );
-
         console.log("result", result);
         await chat.add(req.request.chat_id, {
           role: "tool",
@@ -85,7 +84,6 @@ export const handle = async (req: IRequest): Promise<string> => {
         });
       }
     }
-
     if (ask.choices[0].finish_reason === "stop") {
       response = ask.choices[0].message.content;
       await chat.add(req.request.chat_id, {
@@ -95,6 +93,5 @@ export const handle = async (req: IRequest): Promise<string> => {
       break;
     }
   }
-
   return response;
 };
